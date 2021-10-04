@@ -5,6 +5,11 @@
     <title>Title</title>
 </head>
 <body>
-
+<p>{{ object.username }}</p>
+<p>{{ object.email }}</p>
+<p>{{ object.password }}</p>
+{% for i in object %}
+<p>{{ i }}</p>
+{% endfor %}
 </body>
 </html>

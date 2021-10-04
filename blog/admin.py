@@ -10,7 +10,7 @@ class BookInline(admin.TabularInline):
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    fields = ['title', 'short_description', 'text']
+    fields = ['title', 'short_description', 'text', 'author']
     search_fields = ['title']
 
 
