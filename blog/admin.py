@@ -10,11 +10,11 @@ class BookInline(admin.TabularInline):
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    fields = ['title', 'short_description']
+    fields = ['title', 'short_description', 'text']
     search_fields = ['title']
 
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    fields = ['username', 'article']
+    fields = ['username', 'article', 'text']
     search_fields = ['username']

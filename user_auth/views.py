@@ -1,6 +1,7 @@
-from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm
+from django.views.generic import RedirectView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import AuthenticationForm
+from django.shortcuts import render
 from django.views.generic import (
     CreateView,
     DeleteView,
@@ -9,25 +10,26 @@ from django.views.generic import (
     UpdateView,
 )
 
-from .forms import NewUserForm
+from .forms import NewUserForm, User
 
 
-User = get_user_model
+def thanks(request):
+    return render(request, 'registration/thanks.html')
 
 
 class CreateProfile(CreateView):
+    model = User
     template_name = 'registration/register.html'
     form_class = NewUserForm
-
-    def form_valid(self, form):
-        user = form.save()
+    success_url = 'thanks'
 
 
 class UpdateProfile(LoginRequiredMixin, UpdateView):
+    login_url = 'login'
     model = User
     template_name = 'registration/profile_change.html'
     fields = ['username', 'email']
-    #success_url =
+    success_url = 'thanks'
 
     def get_object(self, queryset=None):
         user = self.request.user
