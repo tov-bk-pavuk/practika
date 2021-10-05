@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Про Статью {{  object.title }}{% endblock %}
+
+{% block content %}
+    <div>
+        <p><a href="{% url 'articles' %}">К списку Статей</a></p>
+        <table cellpadding="2" border="1" width="80%">
+        <tr>
+            <td>Автор:</td>
+            <td>{{object.author }}</td>
+        </tr>
+        <tr>
+            <td>Статья:</td>
+            <td>{{ object.title }}</td>
+        </tr>
+        <tr>
+            <td>Описание статьи</td>
+            <td>{{object.short_description }}</td>
+        </tr>
+        <tr>
+            <td>Текст cтатьи:</td>
+            <td>{{object.text }}</td>
+        </tr>
+        <td>Комментарии:</td>
+        <td>
+        {% for comment in object.comment_set.all %}
+            <p>{{ comment }}</p>
+        {% endfor %}
+        </td>
+        </table>
+    </div>
+{% endblock %}
