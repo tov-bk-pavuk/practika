@@ -1,6 +1,7 @@
 from django.views.generic import RedirectView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import AuthenticationForm
+from django.contrib.auth.forms import UserChangeForm
 from django.shortcuts import render
 from django.views.generic import (
     CreateView,
@@ -27,8 +28,9 @@ class CreateProfile(CreateView):
 class UpdateProfile(LoginRequiredMixin, UpdateView):
     login_url = 'login'
     model = User
+    # form_class = UserChangeForm  # Либо поля либо форма
     template_name = 'registration/profile_change.html'
-    fields = ['username', 'email']
+    fields = ['username', 'email']  # Либо поля либо форма
     success_url = 'thanks'
 
     def get_object(self, queryset=None):
