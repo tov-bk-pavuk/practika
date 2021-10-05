@@ -1,30 +1,25 @@
 {% extends 'base.html' %}
 
-{% block title %}Список книг{% endblock %}
+{% block title %}Статьи{% endblock %}
 {% block content %}
-    <h5><a href="{% url 'home' %}">На главную</a></h5>
-    <h4>Книжечки, мой друг.</h4>
+    <h4> Статьи, мой друг.</h4>
     <div>
-        <h2>Книг на странице: {{ object_list.count }}</h2>
+        <h2>Статей на странице: {{ object_list.count }}</h2>
         <table border="1", cellspacing="1px" cellpadding="5px">
         <tr style="font-weight: bold">
                 <td>id</td>
-                <td align="center">Название книги</td>
-                <td>Страниц</td>
-                <td align="center">Цена, грн</td>
-                <td>Дата публикации</td>
+                <td align="center">Название статьи</td>
+                <td align="center">Краткое описание</td>
                 <td>Ссылка</td>
-                <td>Авторов</td>
+                <td>Комментариев</td>
             </tr>
         {% for instance in object_list %}
             <tr>
                 <td>{{ instance.id }}</td>
-                <td>{{ instance.name  }}</td>
-                <td align="center">{{ instance.pages }}</td>
-                <td>{{ instance.price }}</td>
-                <td>{{ instance.pubdate }}</td>
-                <td><a href="{% url 'detailed' pp=instance.id %}">подробнее...</a></td>
-                <td align="center">{{ instance.authors__count }}</td>
+                <td>{{ instance.title  }}</td>
+                <td>{{ instance.short_description  }}</td>
+                <td><a href="{% url 'art_detail' id=instance.id %}">подробнее...</a></td>
+                <td align="center">{{ instance.comments__count }}</td>
             </tr>
         {% endfor %}
         </table>

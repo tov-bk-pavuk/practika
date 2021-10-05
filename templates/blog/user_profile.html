@@ -3,6 +3,8 @@
 {% block title %}{% endblock %}
 
 {% block content %}
-
-
+    <p>Имя пользователя {{ object.username }}</p>
+    {% for article in object.article_set.all %}
+        <p>Статья: "{{ article.title }}"</p>
+    {% endfor %}
 {% endblock %}

@@ -1,24 +1,23 @@
 {% extends 'base.html' %}
 
-{% block title %}Авторы{% endblock %}
+{% block title %}Пользователи{% endblock %}
 
 {% block content %}
-    <h5><a href="{% url 'home' %}">Домой</a></h5>
-    <h5><a href="{% url 'aut_crt' %}">Создать автора</a></h5>
+    <h5><a href="{% url 'crt_profile' %}">Зарегистрироваться</a></h5>
     <table border="1" cellspacing="1" cellpadding="3">
         <tr>
             <td>ID</td>
             <td>Автор</td>
-            <td>Книг</td>
+            <td>Статей</td>
             <td>Ссылка</td>
 
         </tr>
         {% for instance in object_list %}
             <tr>
                 <td>{{ instance.id }}</td>
-                <td>{{ instance.name  }}</td>
-                <td align="center">{{ instance.book_set.count  }}</td>
-                <td><a href="{% url 'aut_det' pp=instance.id %}">подробнее</a></td>
+                <td>{{ instance.username  }}</td>
+                <td align="center">{{ instance.comment_set.count  }}</td>
+                <td><a href="{% url 'user_det' id=instance.id %}">подробнее</a></td>
 
             </tr>
         {% endfor %}
