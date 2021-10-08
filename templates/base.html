@@ -1,16 +1,18 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
 {% block menu %}
     <ul>
         <li><a href="{% url 'articles' %}">Все статьи</a></li>
-        <li>Авторы</li>
-        <li>Все Комментарии</li>
-        <li>Админка</li>
+        <li><a href="{% url 'users' %}">Авторы</a></li>
+        <li><a href="admin">Админка</a></li>
+        <li><a href={% url 'login' %}>Войти в систему</a></li>
         {% block sub_menu %}{% endblock %}
     </ul>
 {% endblock %}

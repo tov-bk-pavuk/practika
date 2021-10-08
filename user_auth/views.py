@@ -11,7 +11,7 @@ from django.views.generic import (
     UpdateView,
 )
 
-from .forms import NewUserForm, User
+from .forms import NewUserForm, User, NewArticle
 from blog.models import Article, Comment
 
 
@@ -43,19 +43,14 @@ class UpdateProfile(LoginRequiredMixin, UpdateView):
         return user
 
 
-class UserProfile(LoginRequiredMixin, DetailView):
+class UserProfile(LoginRequiredMixin, DetailView, CreateView):
     model = User
     template_name = 'registration/profile.html'
+    form_class = NewArticle
 
     def get_object(self, queryset=None):
         user = self.request.user
         return user
-
-
-class UserProfilePublic(DetailView):
-    model = User
-    template_name = 'blog/user_profile.html'
-    pk_url_kwarg = 'id'
 
 
 class UserLogout(LogoutView):
