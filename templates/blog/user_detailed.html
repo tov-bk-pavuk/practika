@@ -1,21 +1,19 @@
 {% extends 'base.html' %}
 
-{% block title %}Издатель {{ pk.name }}{% endblock %}
+{% block title %}Издатель {{ object.name }}{% endblock %}
 
 {% block content %}
-    <p><a href="{% url 'home' %}">Главная</a></p>
-    <p><a href="{% url 'authors' %}">Назад</a></p>
-    <p>Автором было написано {{ pk.book_set.all.count }} книг</p>
+    <p>Автором было написано {{ object.article_set.all.count }} статей</p>
     <table border="1" cellspacing="1" cellpadding="10">
         <tr>
             <td>Автор</td>
-            <td>{{ object.name }}</td>
+            <td>{{ object.username }}</td>
         </tr>
         <tr>
-            <td>Книги</td>
+            <td>Статьи</td>
             <td>
-                {% for book in object.book_set.all %}
-                <p>{{ book }}</p>
+                {% for article in object.article_set.all %}
+                <p>{{ article }}</p>
                 {% endfor %}
             </td>
         </tr>

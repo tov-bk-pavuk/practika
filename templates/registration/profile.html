@@ -1,11 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<p>Имя пользователя: {{ object.username }}</p>
-<p>Мыло: {{ object.email }}</p>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %} Профиль пользователя {% endblock %}
+
+{% block content %}
+<table>
+    <tr>
+        <td><p>Имя пользователя:</p></td>
+        <td><p> {{ object.username }}</p></td>
+    </tr>
+    <tr>
+        <td><p>Мыло</p></td>
+        <td><p> {{ object.email }}</p></td>
+    </tr>
+    <tr>
+        <td><p>Статьи</p></td>
+        <td>
+            {% for article in object.article_set.all %}
+            <p>{{ article }}</p>
+            {% endfor %}
+        </td>
+    </tr>
+ </table>
+{% endblock %}
