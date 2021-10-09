@@ -43,10 +43,9 @@ class UpdateProfile(LoginRequiredMixin, UpdateView):
         return user
 
 
-class UserProfile(LoginRequiredMixin, DetailView, CreateView):
+class UserProfile(LoginRequiredMixin, DetailView):
     model = User
     template_name = 'registration/profile.html'
-    form_class = NewArticle
 
     def get_object(self, queryset=None):
         user = self.request.user
