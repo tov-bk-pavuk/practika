@@ -27,6 +27,7 @@
         {% for comment in object.comment_set.all %}
             <p>{{ comment }}</p>
         {% endfor %}
+            <p><a href="{% url 'comment_create' id=object.id %}">Добавить комментарий</a></p>
         </td>
         </table>
     </div>
