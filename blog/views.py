@@ -16,7 +16,7 @@ from user_auth.forms import *
 class ArticlesListView(ListView):
     model = Article
     template_name = 'blog/articles.html'
-    queryset = Article.objects.all()
+    queryset = Article.objects.filter(published=True)
     paginate_by = 10
 
 
@@ -28,14 +28,23 @@ def create_article(request):
                 title = form.cleaned_data['text']
                 short_description = form.cleaned_data['short_description']
                 text = form.cleaned_data['text']
+                published = form.cleaned_data['published']
                 user = request.user
                 Article.objects.create(title=title, short_description=short_description,
-                                       text=text, author=user)
-                return HttpResponseRedirect('../articles')
+                                       text=text, author=user, published=published)
+                return HttpResponseRedirect('../../accounts/profile')
         else:
             form = NewArticle()
         return render(request, 'blog/article_create.html', {'form': form})
-    return HttpResponse('Надо авторизоваться')
+    return HttpResponseRedirect('../../accounts/login')
+
+
+class ArticleUpdateView(LoginRequiredMixin, UpdateView):
+    model = Article
+    pk_url_kwarg = 'id'
+    template_name = 'blog/article_update.html'
+    form_class = NewArticle
+    success_url = '../../accounts/profile'
 
 
 class ArticleDetailView(DetailView):
@@ -60,7 +69,7 @@ class UserDetailView(DetailView):
 class CommentListView(ListView):
     model = Comment
     template_name = 'blog/comments.html'
-    queryset = Comment.objects.all()
+    queryset = Comment.objects.filter(is_published=True).all()
     paginate_by = 20
 
 
@@ -72,7 +81,10 @@ def comment_create(request, id):
         if form.is_valid():
             text = form.cleaned_data['text']
             article = Article.objects.get(pk=id)
-            Comment.objects.create(article=article, username=username, text=text)
+            if request.user.is_authenticated:
+                Comment.objects.create(article=article, username=username, text=text)
+            else:
+                Comment.objects.create(article=article, text=text)
             return HttpResponseRedirect('../../article/' + str(id))  # /thanks/
     else:
         form = NewComment()

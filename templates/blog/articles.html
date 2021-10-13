@@ -14,13 +14,15 @@
                 <td>Комментариев</td>
             </tr>
         {% for instance in object_list %}
+            {% if instance.published == True %}
             <tr>
                 <td>{{ instance.id }}</td>
                 <td>{{ instance.title  }}</td>
                 <td>{{ instance.short_description  }}</td>
                 <td><a href="{% url 'art_detail' id=instance.id %}">подробнее...</a></td>
-                <td align="center">{{ instance.comments__count }}</td>
+                <td align="center">{{ instance.comment_set.count }}</td>
             </tr>
+            {% endif %}
         {% endfor %}
         </table>
     </div>

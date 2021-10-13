@@ -16,7 +16,7 @@
         <td><p>Статьи</p></td>
         <td>
             {% for article in object.article_set.all %}
-            <p>{{ article }}</p>
+                <p>{{ article }} <a href="{% url 'art_detail' id=article.id %}">Подробнее</a></p>
             {% endfor %}
         </td>
     </tr>
