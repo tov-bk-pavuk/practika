@@ -22,11 +22,29 @@
             <td>Текст cтатьи:</td>
             <td>{{object.text }}</td>
         </tr>
+        <tr>
+            <td>Статус публикации:</td>
+            <td>{{object.published }}
+            {% if object.author == request.user %}
+                <p><a href="{% url 'art_update' id=object.id %}">Редактировать статью</a></p>
+            {% endif %}
+            </td>
+        </tr>
         <td>Комментарии:</td>
         <td>
         {% for comment in object.comment_set.all %}
-            <p>{{ comment }}</p>
+            <p>
+            {% if comment.is_published is True %}
+
+                {% if comment.username is None %}
+                    Гость
+                    {% else %}
+                    {{ comment.username }} написал:
+                    {{ comment }}</p>
+                {% endif %}
+            {% endif %}
         {% endfor %}
+            <p><a href="{% url 'comment_create' id=object.id %}">Добавить комментарий</a></p>
         </td>
         </table>
     </div>

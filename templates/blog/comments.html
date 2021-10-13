@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Все комментарии{% endblock %}
+
+{% block content %}
+    {% for comment in object.list %}
+        <p>{{ comment.article }}</p>
+        <p>{{ comment.username }}</p>
+        <p>{{ comment.text }}</p>
+    {% endfor %}
+{% endblock %}

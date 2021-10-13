@@ -9,10 +9,13 @@
 <body>
 {% block menu %}
     <ul>
+        <li><a href="{% url 'profile' %}">Профиль</a></li>
         <li><a href="{% url 'articles' %}">Все статьи</a></li>
         <li><a href="{% url 'users' %}">Авторы</a></li>
-        <li><a href="admin">Админка</a></li>
-        <li><a href={% url 'login' %}>Войти в систему</a></li>
+        <li><a href="/admin/">Админка</a></li>
+        <li><a href="{% url 'login' %}">Войти в систему</a></li>
+        <li><a href="{% url 'logout' %}">Выйти</a></li>
+        <li><a href="{% url 'art_create' %}">Создать статью</a></li>
         {% block sub_menu %}{% endblock %}
     </ul>
 {% endblock %}
