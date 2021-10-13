@@ -17,7 +17,7 @@ class NewUserForm(UserCreationForm):
 class NewArticle(ModelForm):
     class Meta:
         model = Article
-        fields = ['title', 'short_description', 'text', 'author']
+        fields = ['title', 'short_description', 'text', 'published']  # 'author'
 
 
 class NewComment(ModelForm):

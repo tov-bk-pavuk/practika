@@ -22,10 +22,14 @@
             <td>Текст cтатьи:</td>
             <td>{{object.text }}</td>
         </tr>
+        <tr>
+            <td>Статус публикации:</td>
+            <td>{{object.published }}</td>
+        </tr>
         <td>Комментарии:</td>
         <td>
         {% for comment in object.comment_set.all %}
-            <p>{{ comment }}</p>
+            <p>{{ comment.username }} {{ comment }}</p>
         {% endfor %}
             <p><a href="{% url 'comment_create' id=object.id %}">Добавить комментарий</a></p>
         </td>

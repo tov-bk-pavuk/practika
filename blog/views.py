@@ -1,4 +1,5 @@
 from blog.models import *
+from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
@@ -19,11 +20,22 @@ class ArticlesListView(ListView):
     paginate_by = 10
 
 
-class ArticleCreateView(LoginRequiredMixin, CreateView):
-    model = Article
-    template_name = 'blog/article_create.html'
-    form_class = NewArticle
-    success_url = '../articles'
+def create_article(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = NewArticle(request.POST)
+            if form.is_valid():
+                title = form.cleaned_data['text']
+                short_description = form.cleaned_data['short_description']
+                text = form.cleaned_data['text']
+                user = request.user
+                Article.objects.create(title=title, short_description=short_description,
+                                       text=text, author=user)
+                return HttpResponseRedirect('../articles')
+        else:
+            form = NewArticle()
+        return render(request, 'blog/article_create.html', {'form': form})
+    return HttpResponse('Надо авторизоваться')
 
 
 class ArticleDetailView(DetailView):

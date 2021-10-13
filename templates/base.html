@@ -9,6 +9,7 @@
 <body>
 {% block menu %}
     <ul>
+        <li><a href="{% url 'profile' %}">Профиль</a></li>
         <li><a href="{% url 'articles' %}">Все статьи</a></li>
         <li><a href="{% url 'users' %}">Авторы</a></li>
         <li><a href="/admin/">Админка</a></li>

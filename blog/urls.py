@@ -5,7 +5,7 @@ from django.urls import path
 
 urlpatterns = [
     path('articles', ArticlesListView.as_view(), name='articles'),
-    path('article/create', ArticleCreateView.as_view(), name='art_create'),
+    path('article/create', create_article, name='art_create'),
     path('article/<int:id>', ArticleDetailView.as_view(), name='art_detail'),
     path('comments', CommentListView.as_view(), name='comments'),
     path('comment/create/<int:id>', comment_create, name='comment_create'),
