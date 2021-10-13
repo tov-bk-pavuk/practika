@@ -1,4 +1,5 @@
 from blog.models import *
+from blog.tasks import *
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
@@ -32,6 +33,7 @@ def create_article(request):
                 user = request.user
                 Article.objects.create(title=title, short_description=short_description,
                                        text=text, author=user, published=published)
+                notify.apply_async(('Новая статья'))
                 return HttpResponseRedirect('../../accounts/profile')
         else:
             form = NewArticle()
