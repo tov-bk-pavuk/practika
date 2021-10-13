@@ -1,12 +1,8 @@
-from blog.models import *
 from blog.tasks import *
-from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.views.generic import (
-    CreateView,
-    DeleteView,
     DetailView,
     ListView,
     UpdateView,
@@ -31,9 +27,11 @@ def create_article(request):
                 text = form.cleaned_data['text']
                 published = form.cleaned_data['published']
                 user = request.user
-                Article.objects.create(title=title, short_description=short_description,
+                a = Article.objects.create(title=title, short_description=short_description,
                                        text=text, author=user, published=published)
-                notify.apply_async(('Новая статья'))
+                url = f'http://127.0.0.1:8000/article/{a.pk}'
+                notify.apply_async(kwargs={'mas': f'Новая статья: от {user.username}'
+                                                  f' {title}, ссылка {url}'})
                 return HttpResponseRedirect('../../accounts/profile')
         else:
             form = NewArticle()
@@ -87,6 +85,13 @@ def comment_create(request, id):
                 Comment.objects.create(article=article, username=username, text=text)
             else:
                 Comment.objects.create(article=article, text=text)
+            url = f'http://127.0.0.1:8000/article/{id}'
+            email = request.user.email
+            if email != '':
+                notify_user.apply_async(kwargs={
+                        'mas': f'Новый комментарий к статье {article.title}: {text}, {url}',
+                        'email': f'{email}'
+                    })
             return HttpResponseRedirect('../../article/' + str(id))  # /thanks/
     else:
         form = NewComment()
