@@ -1,18 +1,13 @@
-from django.views.generic import RedirectView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import AuthenticationForm, LogoutView
-from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.views import LogoutView
 from django.shortcuts import render
 from django.views.generic import (
     CreateView,
-    DeleteView,
     DetailView,
-    ListView,
     UpdateView,
 )
 
-from .forms import NewUserForm, User, NewArticle
-from blog.models import Article, Comment
+from .forms import NewUserForm, User
 
 
 def thanks(request):

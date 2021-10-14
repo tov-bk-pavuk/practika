@@ -40,8 +40,8 @@
                     Гость
                     {% else %}
                     {{ comment.username }} написал:
-                    {{ comment }}</p>
                 {% endif %}
+                {{ comment.text }}</p>
             {% endif %}
         {% endfor %}
             <p><a href="{% url 'comment_create' id=object.id %}">Добавить комментарий</a></p>
