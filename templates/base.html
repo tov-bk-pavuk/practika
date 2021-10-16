@@ -49,6 +49,13 @@
             <li><a class="dropdown-item" href="{% url 'art_create' %}">Создать статью</a></li>
           </ul>
         </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'contact_form' %}">Написать нам</a>
+        </li>
+        <li class="nav-item">
+            <button id="contact_button" type="button" class="btn btn-info">Info</button>
+            <!-- url 'contact_us' %} -->
+        </li>
       </ul>
     </div>
   </div>
@@ -74,6 +81,26 @@
 <button type="button" onclick='
     document.getElementById("cat").src="{% static 'img/cat_11.jpg' %}"
     '>Red Eyes</button>
+{% endblock %}
+
+{% block modalwindow %}
+    <div class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
 
 {% block content %}{% endblock %}
