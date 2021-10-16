@@ -13,6 +13,26 @@ from django.views.generic import (
 from user_auth.forms import *
 
 
+def contact_form(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            text = form.cleaned_data['text']
+            notify_contact.apply_async(kwargs={
+                'name': name,
+                'email': email,
+                'text': text
+            })
+            return HttpResponseRedirect(reverse_lazy('thanks'))
+    else:
+        form = ContactForm()
+    return render(request, 'blog/contact_form.html', context={'form': form})
+
+
+
+
 class ArticlesListView(ListView):
     model = Article
     template_name = 'blog/articles.html'

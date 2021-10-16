@@ -4,6 +4,7 @@ from django.urls import path
 
 
 urlpatterns = [
+    path('contact_form', contact_form, name='contact_form'),
     path('articles', ArticlesListView.as_view(), name='articles'),
     path('article/create', create_article, name='art_create'),
     path('article/<int:id>', ArticleDetailView.as_view(), name='art_detail'),
