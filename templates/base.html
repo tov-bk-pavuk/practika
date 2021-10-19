@@ -53,7 +53,8 @@
         <a class="nav-link" href="{% url 'contact_form' %}">Написать нам</a>
         </li>
         <li class="nav-item">
-            <button id="contact_button" type="button" class="btn btn-info">Info</button>
+            <button id="contact_button" type="button" class="btn btn-info"
+                    data-url="{% url 'contact_form' %}">Info</button>
             <!-- url 'contact_us' %} -->
         </li>
       </ul>
@@ -81,6 +82,10 @@
 <button type="button" onclick='
     document.getElementById("cat").src="{% static 'img/cat_11.jpg' %}"
     '>Red Eyes</button>
+<div class="d" style="border: solid 2px; margin: 100px; padding: 50px;">
+    <p>Экспериментальный контейнер</p>
+</div>
+
 {% endblock %}
 
 {% block modalwindow %}
@@ -108,5 +113,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
             crossorigin="anonymous"></script>
+
+    <!-- Mine JS -->
+    <script src="{% static 'js/js.js' %}"></script>
 </body>
 </html>
