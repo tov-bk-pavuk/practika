@@ -3,7 +3,8 @@ from blog.urls import *
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.template.loader import render_to_string
+from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse, reverse_lazy
 from django.views.generic import (
     DetailView,
@@ -14,6 +15,7 @@ from user_auth.forms import *
 
 
 def contact_form(request):
+    data = dict()
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -26,11 +28,13 @@ def contact_form(request):
                 'text': text
             })
             return HttpResponseRedirect(reverse_lazy('thanks'))
-    else:
-        form = ContactForm()
-    return render(request, 'blog/contact_form.html', context={'form': form})
-
-
+        else:
+            data['form_is_valid'] = False
+    form = ContactForm()
+    context = {'form': form}
+    data['html_form'] = render_to_string('blog/contact_form.html', context, request)
+    # render_to_string это функция, которая рендерит 'request', при помощи Шаблона, передавая туда 'context'
+    return JsonResponse(data)
 
 
 class ArticlesListView(ListView):
