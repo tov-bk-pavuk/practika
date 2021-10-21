@@ -53,9 +53,15 @@
         <a class="nav-link" href="{% url 'contact_form' %}">Написать нам</a>
         </li>
         <li class="nav-item">
+
+            <!-- КНОПКА -->
+
             <button id="contact_button" type="button" class="btn btn-info"
-                    data-url="{% url 'contact_form' %}">Info</button>
-            <!-- url 'contact_us' %} -->
+                    data-url="{% url 'contact_form' %}">Info</button> <!-- url 'contact_us' %} -->
+
+            <!-- КНОПКА -->
+
+
         </li>
       </ul>
     </div>
@@ -66,11 +72,6 @@
 
 {% block javaexpirements %}
     <p id="demo">JavaScript can change HTML content.</p>
-
-    <!-- Экспериментальный скрипт -->
-    <script type="text/javascript">
-    {#alert('А вот и сообщение, которое не даёт странице загрузиться')#}
-    </script>
 
 <button type="button" onclick='
     document.getElementById("demo").innerHTML = "Hello JavaScript!"
@@ -88,25 +89,6 @@
 
 {% endblock %}
 
-{% block modalwindow %}
-    <div class="modal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-{% endblock %}
 
 {% block content %}{% endblock %}
 <!-- Вариант 1: Bootstrap в связке с Popper -->
