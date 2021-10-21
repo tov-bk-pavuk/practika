@@ -1,5 +1,4 @@
 let but = document.querySelector('#contact_button')
-let but_send = document.querySelector('#send')
 let di = document.querySelector('.d')
 
 console.log('Перед вызовом кнопки Инфо');

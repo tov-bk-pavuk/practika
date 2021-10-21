@@ -84,23 +84,6 @@
 <div class="d" style="border: solid 2px; margin: 100px; padding: 50px; visibility: hidden;">
 
     <p>Экспериментальный контейнер</p>
-<form class="form_s" action="{% url 'contact_form' %}" method="post">
-    {% csrf_token %}
-<div class="mb-3">
-    <label for="id_name" class="form-label">Ваше имя</label>
-    {{ form.name }}
-</div>
-<div class="mb-3">
-    <label for="id_email" class="form-label">Email address</label>
-    {{ form.email }}
-</div>
-<div class="mb-3">
-    <label for="id_text" class="form-label">Text</label>
-    {{ form.text }}
-</div>
-    <input id="send" type="button" value="Отправить">
-    </form>
-
 
 </div>
 
@@ -114,7 +97,6 @@
             crossorigin="anonymous"></script>
 
     <!-- Mine JS -->
-    <script src="{% static 'js/js.js' %}"></script>
     <script src="{% static 'js/js.js' %}"></script>
 </body>
 </html>
