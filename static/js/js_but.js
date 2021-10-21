@@ -6,20 +6,13 @@ let but_send = document.querySelector('#send')
 but_send.onmouseover = function () {  // Эксперименты с JS
         but_send.style.background = 'red';
         but_send.style.color = 'white';
+        console.log('ssss')
     };
 
 function batik () {
     $('but_send');
     console.log('Перед запросом');
-    $.ajax({
-        type: 'post',
-        dataType: 'json',
-        data: $('form').serialize(),
-        url: $('.form_s').attr('action'),
-        success: function (data) {
-            $('.d').html(data.html_form);
-        }
-    });
+
     return false;
     }
 

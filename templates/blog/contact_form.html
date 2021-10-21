@@ -1,20 +1,9 @@
-{% load static %}
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8" />
-  <title>Контактная форма</title>
-</head>
-<body>
  {% block content %}
-    <form class="form_s" action="{% url 'contact_form' %}" method="post">
+    <form id="form-s" class="form_s" action="{% url 'contact_form' %}" method="post">
     {% csrf_token %}
         {{ form.as_p}}
     <input id="send" type="submit" value="Отправить">
     </form>
 {% endblock %}
     <!-- Mine JS -->
-<script src="{% static 'js/js_but.js' %}"></script>
-
-</body>
-</html>
+{#<script src="{% static 'js/js_but.js' %}"></script>#}

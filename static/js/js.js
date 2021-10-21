@@ -10,16 +10,30 @@ but.onclick = function () {  //but.onclick = function () {
         url: $(but).attr("data-url"),
         type: 'get',
         dataType: 'json',
-        success: function (data) {
-            $('.d').html(data.html_form);
-            },
+        success: formLoaded
         });
     console.log('Форма вызвана');
     }
+function formLoaded(data) {
+    $('.d').html(data.html_form);
+    console.log('format loaded')
+    console.log($('#form-s'), document.querySelector('#form-s'))
 
-//$("#modal-book").on("submit", ".js-book-create-form", saveForm);
+    // document.querySelector('#form-s').addEventListener('onclick', function (event)
+    $('#form-s').on('submit', function(event) {
+        console.log(event, event.target)
+        event.preventDefault();
 
-// $(".send").submit(function( event ) {
-//   alert( "Handler for .submit() called." );
-//   event.preventDefault();
-// });
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            data: $(event.target).serialize(),
+            url: $(event.target).attr('action'),
+            success: function (data) {
+                console.log(data)
+                $('.d').html(data.html_form);
+            }
+        });
+    })
+
+}
