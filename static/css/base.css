@@ -19,3 +19,12 @@ table td {
 table {
     border: solid 2px;
 }
+
+#borya {
+    border: solid 10px green;
+}
+
+div .d {
+    visibility: hidden;
+    border: solid 5px green;
+}

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
      <!-- Bootstrap CSS -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 
@@ -50,9 +51,6 @@
           </ul>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="{% url 'contact_form' %}">Написать нам</a>
-        </li>
-        <li class="nav-item">
 
             <!-- КНОПКА -->
 
@@ -83,8 +81,27 @@
 <button type="button" onclick='
     document.getElementById("cat").src="{% static 'img/cat_11.jpg' %}"
     '>Red Eyes</button>
-<div class="d" style="border: solid 2px; margin: 100px; padding: 50px;">
+<div class="d" style="border: solid 2px; margin: 100px; padding: 50px; visibility: hidden;">
+
     <p>Экспериментальный контейнер</p>
+<form class="form_s" action="{% url 'contact_form' %}" method="post">
+    {% csrf_token %}
+<div class="mb-3">
+    <label for="id_name" class="form-label">Ваше имя</label>
+    {{ form.name }}
+</div>
+<div class="mb-3">
+    <label for="id_email" class="form-label">Email address</label>
+    {{ form.email }}
+</div>
+<div class="mb-3">
+    <label for="id_text" class="form-label">Text</label>
+    {{ form.text }}
+</div>
+    <input id="send" type="button" value="Отправить">
+    </form>
+
+
 </div>
 
 {% endblock %}
@@ -97,6 +114,7 @@
             crossorigin="anonymous"></script>
 
     <!-- Mine JS -->
+    <script src="{% static 'js/js.js' %}"></script>
     <script src="{% static 'js/js.js' %}"></script>
 </body>
 </html>

@@ -1,17 +1,26 @@
-let button = document.querySelector('#contact_button')
+let but = document.querySelector('#contact_button')
+let but_send = document.querySelector('#send')
+let di = document.querySelector('.d')
 
-function but_funcs () {
-    button.onclick = function () {
-        $(button);
-        $.ajax({
-            url: $(button).attr("data-url"), // берём ссылку из атрибута "data-url" тега с id "contact_button"
-            type: 'get',
-            dataType: 'json',
-            success: function (data) {
-                $('.d').html(data.html_form)
+console.log('Перед вызовом кнопки Инфо');
+
+but.onclick = function () {  //but.onclick = function () {
+    $(but);
+    di.style.visibility = 'visible'
+    $.ajax({
+        url: $(but).attr("data-url"),
+        type: 'get',
+        dataType: 'json',
+        success: function (data) {
+            $('.d').html(data.html_form);
             },
-            });
-        }
-}
+        });
+    console.log('Форма вызвана');
+    }
 
-but_funcs()  // Вызываем функцию.
+//$("#modal-book").on("submit", ".js-book-create-form", saveForm);
+
+// $(".send").submit(function( event ) {
+//   alert( "Handler for .submit() called." );
+//   event.preventDefault();
+// });
