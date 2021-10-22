@@ -28,7 +28,9 @@ def contact_form(request):
                 'email': email,
                 'text': text
             })
-            return HttpResponseRedirect(reverse_lazy('thanks'))
+            data['form_is_valid'] = True
+            data['html_form'] = render_to_string('blog/contact_form_success.html')
+            return JsonResponse(data)
         else:
             data['form_is_valid'] = False
     context = {'form': form}

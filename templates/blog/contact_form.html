@@ -1,5 +1,5 @@
  {% block content %}
-    <form id="form-s" class="form_s" action="{% url 'contact_form' %}" method="post">
+    <form id="form_s" class="form_s" action="{% url 'contact_form' %}" method="post">
     {% csrf_token %}
         {{ form.as_p}}
     <input id="send" type="submit" value="Отправить">
