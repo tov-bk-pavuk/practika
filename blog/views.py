@@ -16,6 +16,7 @@ from user_auth.forms import *
 
 def contact_form(request):
     data = dict()
+    form = ContactForm()
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -27,10 +28,11 @@ def contact_form(request):
                 'email': email,
                 'text': text
             })
-            return HttpResponseRedirect(reverse_lazy('thanks'))
+            data['form_is_valid'] = True
+            data['html_form'] = render_to_string('blog/contact_form_success.html')
+            return JsonResponse(data)
         else:
             data['form_is_valid'] = False
-    form = ContactForm()
     context = {'form': form}
     data['html_form'] = render_to_string('blog/contact_form.html', context, request)
     # render_to_string это функция, которая рендерит 'request', при помощи Шаблона, передавая туда 'context'
