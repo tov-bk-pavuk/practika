@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'django_celery_results',
     'blog',
     'user_auth',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -113,3 +114,13 @@ CELERY_ACCEPT_CONTENT = ['json']  # ['aplication/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+}
