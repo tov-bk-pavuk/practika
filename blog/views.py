@@ -1,16 +1,17 @@
+from django.contrib.auth.models import User, Group
+from rest_framework import viewsets
+from rest_framework import permissions
+from blog.serializers import UserSerializer, GroupSerializer, ArticleSerializer, CommentsSerializer
+
+
 from blog.tasks import *
-from blog.urls import *
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse, reverse_lazy
-from django.views.generic import (
-    DetailView,
-    ListView,
-    UpdateView,
-)
+from django.views.generic import DetailView, ListView, UpdateView
 from user_auth.forms import *
 
 
@@ -125,3 +126,39 @@ def comment_create(request, id):
         form = NewComment()
         article = Article.objects.get(pk=id)
     return render(request, 'blog/comment_create.html', {'form': form, 'article': article})
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class GroupViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class ArticleViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Article.objects.all().order_by('-published')
+    serializer_class = ArticleSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class CommentViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Comment.objects.all()
+    serializer_class = CommentsSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]

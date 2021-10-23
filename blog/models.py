@@ -18,7 +18,8 @@ class Article(models.Model):
 
 class Comment(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
-    username = models.CharField(max_length=250, verbose_name='имя пользователя', default='Guest') # ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # username = models.CharField(max_length=250, verbose_name='имя пользователя', default='Guest') # ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     text = models.CharField(max_length=250, verbose_name='Текст комментария')
     is_published = models.BooleanField(default=False, verbose_name='Опубликовано')
 
