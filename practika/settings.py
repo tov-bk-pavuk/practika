@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'django_celery_results',
     'blog',
     'user_auth',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -113,3 +114,12 @@ CELERY_ACCEPT_CONTENT = ['json']  # ['aplication/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
+
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
